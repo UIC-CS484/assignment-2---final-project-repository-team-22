@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Twiggy-Regular';
+  src: url('Twiggy-Regular.eot');
+  src: url('Twiggy-Regular.eot?#iefix') format('embedded-opentype'),
+       url('Twiggy-Regular.svg#Twiggy-Regular') format('svg'),
+       url('Twiggy-Regular.ttf') format('truetype'),
+       url('Twiggy-Regular.woff') format('woff'),
+       url('Twiggy-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
