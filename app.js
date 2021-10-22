@@ -1,12 +1,13 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var loginRouter = require('./routes/login');
-var registerRouter = require('./routes/register');
+const indexRouter = require('./routes/index');
+const loginRouter = require('./routes/login');
+const registerRouter = require('./routes/register');
+const registerSubmitRouter = require('./routes/registerSubmit');
 
 var app = express();
 
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'views')));
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
+app.use('/registerSubmit', registerSubmitRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
