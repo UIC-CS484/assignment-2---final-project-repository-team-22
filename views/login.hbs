@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Login - Extinct or Alive</title>
+    <link rel="icon" href="images/Tree.ico" type="image/x-icon">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+    <meta name="author" content="Meer Piyush Shah">
+    <meta name="description" content="This webpage is part of the submission for
+      assignment 2 of the CS-484 course. It is the first iteration of the main
+      website">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <link rel="stylesheet" href="assets/css/template.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/login.css" type="text/css"/>
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+  </head>
+
+  <body class="is-preload">
+    <div id="wrapper" class="divided">
+
+      <!-- Signup Form -->
+      <section class="wrapper style1 align-center">
+        <div class="inner">
+          <header>
+            <h3>Sign-up</h3>
+          </header>
+          <div class="content">
+
+            <form method="post" action="#">
+              <div class="fields">
+                <div class="field half">
+                  <label for="username">Username</label>
+                  <div class="with_button">
+                    <input type="text" name="username" id="username" value="Fat Panda"
+                      class="has_button" readonly/>
+                    <button type="button" name="refresh_username" class="input_button">
+                      <img src="assets\web-icons\refresh.png" alt="refresh" class="within_input">
+                    </button>
+                  </div>
+                </div>
+                <div class="field half">
+                  <label for="email">Email</label>
+                  <input type="email" name="email" id="email" value="" />
+                </div>
+                <div class="field half">
+                  <label for="password">Password</label>
+                  <div class="with_button">
+                    <input type="password" name="password" id="password"/>
+                    <button type="button" name="show_password" class="input_button">
+                      <img src="assets\web-icons\show.png" alt="refresh" class="within_input">
+                    </button>
+                  </div>
+                </div>
+                <div class="field half with_button">
+                  <label for="c_password">Confirm Password</label>
+                  <div class="with_button">
+                    <input type="password" name="c_password" id="c_password"/>
+                    <button type="button" name="show_password" class="input_button">
+                      <img src="assets\web-icons\show.png" alt="refresh" class="within_input">
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <input type="submit" name="submit" id="submit" value="Sign-Up"/>
+            </form>
+
+          </div>
+        </section>
+
+    </div>
+  </body>
+
+</html>
