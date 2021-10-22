@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Login - Extinct or Alive</title>
+    <title>Register - Extinct or Alive</title>
     <link rel="icon" href="assets/images/Tree.ico" type="image/x-icon">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -25,7 +25,7 @@
       <section class="wrapper style1 align-center">
         <div class="inner">
           <header>
-            <h3>Login</h3>
+            <h3>Register</h3>
           </header>
           <div class="content">
 
@@ -42,6 +42,10 @@
                   </div>
                 </div>
                 <div class="field half">
+                  <label for="email">Email</label>
+                  <input type="email" name="email" id="email" value="" />
+                </div>
+                <div class="field half">
                   <label for="password">Password</label>
                   <div class="with_button">
                     <input type="password" name="password" id="password"/>
@@ -50,10 +54,19 @@
                     </button>
                   </div>
                 </div>
+                <div class="field half with_button">
+                  <label for="c_password">Confirm Password</label>
+                  <div class="with_button">
+                    <input type="password" name="c_password" id="c_password"/>
+                    <button type="button" name="show_password" class="input_button">
+                      <img src="assets\web-icons\show.png" alt="refresh" class="within_input">
+                    </button>
+                  </div>
+                </div>
               </div>
-              <input type="submit" name="submit" id="submit" value="Login"/>
+              <input type="submit" name="submit" id="submit" value="Sign-Up"/>
             </form>
-            <p>Don't have an account? <a href="/register">Register</a></p>
+            <p>Already have an account? <a href="/login">Login</a></p>
           </div>
         </section>
 

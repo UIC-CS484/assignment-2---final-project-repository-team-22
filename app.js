@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
+var registerRouter = require('./routes/register');
 
 var app = express();
 
@@ -21,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'views')));
 
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
+app.use('/register', registerRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -35,11 +37,12 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.send(err.message);
 });
 
 app.listen(5000, ()=>{
   console.log("Listening on port 5000.");
 });
+
 
 module.exports = app;
