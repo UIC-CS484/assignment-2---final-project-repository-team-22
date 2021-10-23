@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const fileSystem = require('fs');
 const passwordUtil = require('../utils/passwordUtil');
 const databaseUtil = require('../utils/databaseUtil');
 
@@ -47,23 +46,20 @@ router.post('/submit', function(request, response, next){
   //Generating userID until a new one is found (TODO):
   let userId;
   do{
-    userId = Math.random()*1000000;
+    userId = parseInt(Math.random()*1000000);
   }while(databaseUtil.exists("userId", userId));
 
   const {hash, salt} = passwordUtil.hashPassword(password);
-  console.log("UserID: "+userId)
-  console.log("Email: "+email);
-  console.log("Username: "+username);
-  console.log("Hash: "+hash);
-  console.log("Salt: "+salt);
 
-  let user = {
+  const user = {
     id: userId,
     email: email,
     username: username,
     hash: hash,
     salt: salt
   };
+
+  databaseUtil.addUser(user);
 
   response.render('special_page', {username});
 });
