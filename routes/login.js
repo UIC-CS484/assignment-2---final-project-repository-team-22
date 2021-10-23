@@ -19,9 +19,9 @@ router.post('/submit', function(request, response, next){
     "There was a problem. Please check your credentials and try again"
   );
   passport.authenticate('local', {
-    failureRedirect: '/login?'+errorMessage,
+    failureRedirect: '/login?errorMessage='+errorMessage,
     successRedirect: '/special_page'
-  });
+  })(request, response, next);
 });
 
 module.exports = router;

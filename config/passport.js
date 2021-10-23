@@ -27,13 +27,16 @@ const verifyCallback = (username, password, done) => {
 }
 
 const strategy = new localStrategy(customFields, verifyCallback);
-passport.use(strategy);
 
-passport.serializeUser((user, done)=>{
-  done(null, user.userId);
-});
+module.exports = function(passport){
+  passport.use(strategy);
 
-passport.deserializeUser((userId, done)=>{
-  const currentUser = databaseUtil.exists("userId", userId);
-  done(null, currentUser);
-});
+  passport.serializeUser((user, done)=>{
+    done(null, user.userId);
+  });
+
+  passport.deserializeUser((userId, done)=>{
+    const currentUser = databaseUtil.exists("userId", userId);
+    done(null, currentUser);
+  });
+}

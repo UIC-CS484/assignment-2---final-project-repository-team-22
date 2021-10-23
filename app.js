@@ -10,6 +10,7 @@ const indexRouter = require('./routes/index');
 const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
 const logoutRouter = require('./routes/logout');
+const specialPageRouter = require('./routes/special_page');
 
 const app = express();
 
@@ -32,7 +33,7 @@ app.use(session({
   }
 }));
 
-require('./config/passport');
+require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -40,6 +41,7 @@ app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/logout', logoutRouter);
+app.use('/special_page', specialPageRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
