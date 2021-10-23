@@ -39,5 +39,5 @@ passportUtil.js contains code to check passwords.
 Contains 3 methods.
 hashPassword cannot be tested, because a random salt is generated each time and output cannot be predicted.
 validatePassword checks the entered password.
-This function is tested by entering a valid combination, an invalid password and an invalid hash
+This function is tested by entering a valid combination, an invalid password and an invalid hash.
 isPasswordStrong is also tested.

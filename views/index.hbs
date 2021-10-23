@@ -34,7 +34,21 @@
 
 							</p>
 							<ul class="actions stacked">
-								<li><a href="/register" class="button big wide smooth-scroll-middle">Register</a></li>
+								<li>
+									<a href="/register" class="button big wide smooth-scroll-middle" id="registerButton">
+										Register
+									</a>
+								</li>
+								<li>
+									<a href="/logout" class="button big wide smooth-scroll-middle" id="logoutButton">
+										Logout
+									</a>
+								</li>
+								<li>
+									<p id="welcomeText" >Welcome
+										<span id="usernameText">{{user.username}}</span>!
+									</p>
+								</li>
 							</ul>
 						</div>
 						<p id="video_credit">
@@ -56,6 +70,7 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script src="assets/js/index.js"></script>
 
 	</body>
 </html>

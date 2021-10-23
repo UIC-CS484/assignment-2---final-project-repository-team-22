@@ -68,7 +68,7 @@ router.post('/submit', function(request, response, next){
     );
     passport.authenticate('local', {
       failureRedirect: '/register?'+errorMessage,
-      successRedirect: '/special_page'
+      successRedirect: '/'
     })(request, response, next);
   }
 });
