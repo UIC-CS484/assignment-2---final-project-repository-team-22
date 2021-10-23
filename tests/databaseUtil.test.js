@@ -36,7 +36,7 @@ describe("Testing database' exists function: ", ()=>{
 
   test("Testing invalid username", ()=>{
     const invalidUsername = "";
-    const userValue = databaseUtil.exists("email", invalidUsername);
+    const userValue = databaseUtil.exists("username", invalidUsername);
     expect(userValue).toBe(false);
   });
 

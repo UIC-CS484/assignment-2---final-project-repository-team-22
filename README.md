@@ -22,22 +22,22 @@
 
 #### Unit Testing Strategy and Explanation:
 
-In the current assignment, most of the JavaScript files are routing and config files.
+In the current assignment, most of the JavaScript files are routing and config files. <br/>
 To help with maintainability and adopt better code practices, the main functionality, i.e. almost all the verification logic, is written in the utils file.
-These are the files (for now) that need to be tested.
+These are the files (for now) that need to be tested.<br/>
 
-databaseUtil.js contains all the logic for interacting with the users.json file, that is temporarily acting as the DB.
-The first function of this file is exists which checks if a certain value already exists in the DB.
-It takes two parameters, fieldType and it's value.
-To tests need to cover valid and invalid values for both these parameters.
-So, for each fieldType, a valid and invalid value is tested.
-Finally, an invalid fieldType is also tested.
-This function also returns a user object, if the user does exist. This functionality is also tested.
-This file also contains addUser method, which appends the user to a file and does not return anything, hence has to be tested manually.
+databaseUtil.js contains all the logic for interacting with the users.json file, that is temporarily acting as the DB.<br/>
+The first function of this file is exists which checks if a certain value already exists in the DB.<br/>
+It takes two parameters, fieldType and it's value.<br/>
+To tests need to cover valid and invalid values for both these parameters.<br/>
+So, for each fieldType, a valid and invalid value is tested.<br/>
+Finally, an invalid fieldType is also tested.<br/>
+This function also returns a user object, if the user does exist. This functionality is also tested.<br/>
+This file also contains addUser method, which appends the user to a file and does not return anything, hence has to be tested manually.<br/>
 
-passportUtil.js contains code to check passwords.
-Contains 3 methods.
-hashPassword cannot be tested, because a random salt is generated each time and output cannot be predicted.
-validatePassword checks the entered password.
-This function is tested by entering a valid combination, an invalid password and an invalid hash.
-isPasswordStrong is also tested.
+passportUtil.js contains code to check passwords.<br/>
+Contains 3 methods.<br/>
+hashPassword cannot be tested, because a random salt is generated each time and output cannot be predicted.<br/>
+validatePassword checks the entered password.<br/>
+This function is tested by entering a valid combination, an invalid password and an invalid hash.<br/>
+isPasswordStrong is also tested by providing a few strong and a few weak passwords.<br/>

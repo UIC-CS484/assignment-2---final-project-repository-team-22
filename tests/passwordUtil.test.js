@@ -19,6 +19,25 @@ describe("Tesing passwordUtil's validatePassword", ()=>{
     expect(result).toBe(false);
   });
 
+  test("tesing invalid hash", ()=>{
+    const password = "abcd1234";
+    const hash = "3fd861e24130b64ac21544e95427a7177e0427841e120b04f0fd69083122b3b73d7a206ebcf79368bee6cf6668145c7e26b662cb262cb197e";
+    const salt = "527d3a9c1fcb4e6279454df8112331811c62bee691e24d5bec788191f61de649"
+
+    const result = passwordUtil.validatePassword(password, hash, salt);
+    expect(result).toBe(false);
+  });
+
+  test("tesing invalid salt", ()=>{
+    const password = "abcd1234";
+    const hash = "e6ca6e5b539ca273fd861e24130b64ac21544e95427a7177e0427841e120b04f0fd69083122b3b73d7a206ebcf79368bee6cf6668145c7e26b662cb262cb197e";
+    const salt = "4df8112331811c62bee691e24d5bec788191f61de649"
+
+    const result = passwordUtil.validatePassword(password, hash, salt);
+    expect(result).toBe(false);
+  });
+
+
 });
 
 describe("Testing passwordUtil's isPasswordStrong", ()=>{
