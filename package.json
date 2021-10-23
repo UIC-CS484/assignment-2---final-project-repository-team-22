@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon app.js --ignore users.json"
+    "start": "nodemon app.js --ignore users.json",
+    "test": "jest --coverage"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -16,5 +17,8 @@
     "morgan": "~1.9.1",
     "passport": "^0.5.0",
     "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "jest": "^27.3.1"
   }
 }
