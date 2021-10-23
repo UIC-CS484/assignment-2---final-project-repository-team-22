@@ -35,8 +35,8 @@ router.post('/', function(request, response, next){
     hash: hash,
     salt: salt
   };
-  
-  res.render('special_page', {username});
+
+  response.render('special_page', {username});
 });
 
 module.exports = router;

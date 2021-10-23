@@ -3,6 +3,27 @@ const existingUsersData = require('../users.json');
 const fileSystem = require('fs');
 
 function exists(fieldType, value){
+  const users = existingUsersData.users;
+  if(typeof users=='undefined')
+    return false;
+  switch(fieldType){
+    case "username":
+      for(user of users)
+        if(user.username == value)
+          return user;
+      return false;
+    case "userId":
+      for(user of users)
+        if(user.userId == value)
+          return user;
+      return false;
+    case "email":
+      for(user of users)
+        if(user.email == value)
+          return user;
+      return false;
+  }
+
   return false;
 }
 

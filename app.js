@@ -1,12 +1,15 @@
 const createError = require('http-errors');
 const express = require('express');
+const session = require('express-session');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
+const passport = require('passport');
 const indexRouter = require('./routes/index');
 const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
+const logoutRouter = require('./routes/logout');
 
 const app = express();
 
@@ -16,13 +19,27 @@ app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'views')));
+
+app.use(session({
+  secret: 'Itnaa Secret',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 1000*60*60*24*7 //One week
+  }
+}));
+
+require('./config/passport');
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
+app.use('/logout', logoutRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -37,12 +54,11 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.send(err.message);
+  res.send(err.toString());
 });
 
 app.listen(5000, ()=>{
   console.log("Listening on port 5000.");
 });
-
 
 module.exports = app;

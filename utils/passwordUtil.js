@@ -10,7 +10,7 @@ function hashPassword(password){
   };
 }
 
-function isPasswordValid(inputPassword, existingHash, salt){
+function validatePassword(inputPassword, existingHash, salt){
   const generatedHash = crypto.pbkdf2Sync(inputPassword, salt, 10000, 64, 'sha512').toString('hex');
   return existingHash === generatedHash;
 }
@@ -34,5 +34,5 @@ function isPasswordStrong(password){
 }
 
 module.exports.hashPassword = hashPassword;
-module.exports.isPasswordValid = isPasswordValid;
+module.exports.validatePassword = validatePassword;
 module.exports.isPasswordStrong = isPasswordStrong;
