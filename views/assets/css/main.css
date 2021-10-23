@@ -31,14 +31,34 @@
   object-fit: cover;
 }
 
-.banner > .content{
+.banner > .content > li{
   color: white;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  -webkit-text-stroke: 1px black;
+}
+
+.banner > .content p{
+  color: white;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-shadow: 1px 1px black;
+}
+
+.content a{
+  margin-top: 10px;
+  color: white;
+  text-shadow: 1px 1px black;
 }
 
 #video_credit{
   position: absolute;
-  bottom: 0%;
-  left: 2%;
+  top: 2%;
+  right: 2%;
   font-size: 1em;
   z-index: 2;
+  color: white;
+  text-shadow: 1px 1px black;
 }
