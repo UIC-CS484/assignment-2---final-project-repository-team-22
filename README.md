@@ -9,7 +9,7 @@
   * For an exhaustive list, refer the package.json file.
 
 #### Project ER Diagram:
-![ERD]('database/ER Diagram.svg');
+![ERD](database/ExtinctOrAlive_ERD.png);
 
 #### Reference and Tutorials:
 * Node and Express - [FreeCodeCamp](https://www.youtube.com/watch?v=Oe421EPjeBE)
