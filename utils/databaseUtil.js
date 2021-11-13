@@ -18,7 +18,7 @@ db.on('trace', function (query){
   console.log("Executing query: "+query);
 });
 
-function exists(fieldType, value){
+let exists = (fieldType, value, successCallback, failureCallback) => {
 
   console.log(LOG_PREFIX+"Checking-> "+fieldType+":"+value);
 
@@ -30,18 +30,22 @@ function exists(fieldType, value){
       break;
     case 'userId':
       selectQuery = "SELECT * FROM user WHERE user_id = $value";
+      break;
     case 'email':
       selectQuery = "SELECT * FROM user WHERE email = $value";
+      break;
     default:
       console.log(LOG_PREFIX+"Invalid field type");
-      return "Error: Invalid field type";
+      failureCallback("Error: Invalid field type");
+      return;
   }
   const params = {1: fieldType, $value: value};
 
   const fetchCallback = (err, row)=>{
     if(err){
       console.log(LOG_PREFIX+"Error executing select query: "+err.message);
-      return console.log(err.message);
+      failureCallback(console.log(err.message));
+      return;
     }
     if(typeof row !== 'undefined'){
       console.log(LOG_PREFIX+"Exists.");
@@ -49,13 +53,15 @@ function exists(fieldType, value){
         username:row.username,
         hash:row.password_hash,
         salt:row.salt,
-        userId:row.userId,
+        userId:row.user_id,
         email:row.email
       };
-      return user;
+      successCallback(user);
+      return;
     }
     console.log(LOG_PREFIX+"Not found");
-    return false;
+    successCallback(false);
+    return;
   };
 
   //Fetching data from DB:

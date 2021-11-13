@@ -12,26 +12,33 @@ const customFields = {
 
 const verifyCallback = (username, password, done) => {
   console.log(LOG_PREFIX+"Trying to authenticate: "+username);
-  const currentUser = databaseUtil.exists("username", username);
 
-  if(!currentUser){ //User doesn't exist
-    console.log(LOG_PREFIX+"User doesn't exist");
+  const fetchSuccessful = (currentUser) => {
+    if(!currentUser){ //User doesn't exist
+      console.log(LOG_PREFIX+"User doesn't exist");
+      return done(null, false);
+    }
+
+    const isPasswordValid = passwordUtil.validatePassword(
+      password,
+      currentUser.hash,
+      currentUser.salt
+    );
+
+    if(isPasswordValid){
+      console.log(LOG_PREFIX+"Valid password.");
+      return done(null, currentUser);
+    }
+
+    console.log(LOG_PREFIX+"Login failed, likely invalid password");
     return done(null, false);
   }
 
-  const isPasswordValid = passwordUtil.validatePassword(
-    password,
-    currentUser.hash,
-    currentUser.salt
-  );
-
-  if(isPasswordValid){
-    console.log(LOG_PREFIX+"Valid password.");
-    return done(null, user);
+  const fetchFailed = (error) => {
+    console.error(error);
   }
 
-  console.log(LOG_PREFIX+"Login failed, likely invalid password");
-  return done(null, false);
+  databaseUtil.exists("username", username, fetchSuccessful, fetchFailed);
 }
 
 const strategy = new localStrategy(customFields, verifyCallback);
@@ -40,11 +47,17 @@ module.exports = function(passport){
   passport.use(strategy);
 
   passport.serializeUser((user, done)=>{
+    console.log("Serializing: "+user.userId);
     done(null, user.userId);
   });
 
   passport.deserializeUser((userId, done)=>{
-    const currentUser = databaseUtil.exists("userId", userId);
-    done(null, currentUser);
+    databaseUtil.exists("userId", userId,
+      (currentUser)=>{
+        done(null, currentUser);
+      },
+      (errorMessage)=>{
+        console.error(errorMessage);
+      });
   });
 }

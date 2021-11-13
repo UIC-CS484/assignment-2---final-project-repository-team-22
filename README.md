@@ -8,6 +8,9 @@
   * [Passport.js](https://www.passportjs.org/)
   * For an exhaustive list, refer the package.json file.
 
+#### Project ER Diagram:
+![ERD]('database/ER Diagram.svg');
+
 #### Reference and Tutorials:
 * Node and Express - [FreeCodeCamp](https://www.youtube.com/watch?v=Oe421EPjeBE)
 * Passport.js - [FreeCodeCamp](https://www.youtube.com/watch?v=F-sFp_AvHc8)

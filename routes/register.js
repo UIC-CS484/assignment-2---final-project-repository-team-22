@@ -23,52 +23,62 @@ router.post('/submit', function(request, response, next){
   const username = request.body.username;
   const password = request.body.password;
 
-  //Checking if email or username already exist (TODO):
-  if(databaseUtil.exists("email", email)){
-    //Probably shouldn't display "Email exists" for privacy reasons
-    //TODO/Question: Figure out a way to provide a better experience while ensuring privacy
-    const errorMessage = "There was an error.";
-    console.log("Email already exists: "+email);
-    response.redirect('/register?errorMessage='+errorMessage);
-  }
-  else if(databaseUtil.exists("username", username)){
-    const errorMessage = "Username already exists try a new one";
-    console.log("Username already exists: "+username);
-    response.redirect('/register?errorMessage='+errorMessage);
-  }
-  else if(!passwordUtil.isPasswordStrong(password)){
+  //Checking if email or username already exist:
+  databaseUtil.exists("email", email,
+    (currentUser)=>{
+      if(typeof currentUser!=='undefined'){
+        const errorMessage = "There was an error.";
+        console.log("Email already exists: "+email);
+        response.redirect('/register?errorMessage='+errorMessage);
+      }
+    },
+    (errorMessage)=>{
+      console.error(errorMessage);
+    }
+  );
+
+  databaseUtil.exists("username", username,
+    (currentUser)=>{
+      if(typeof currentUser!=='undefined'){
+        const errorMessage = "Username already exists.";
+        console.log("Username already exists: "+email);
+        response.redirect('/register?errorMessage='+errorMessage);
+      }
+    },
+    (errorMessage)=>{
+      console.error(errorMessage);
+    }
+  );
+
+  if(!passwordUtil.isPasswordStrong(password)){
     const errorMessage = encodeURIComponent("Password isn't strong enough");
     console.log("Weak password");
     //Probably not secure, TODO figure out a better way
     response.redirect('/register?errorMessage='+errorMessage);
   }
-  else{
-    //Generating userID until a new one is found (TODO):
-    let userId;
-    do{
-      userId = parseInt(Math.random()*1000000);
-    }while(databaseUtil.exists("userId", userId));
 
-    const {hash, salt} = passwordUtil.hashPassword(password);
+  //Generating userID until a new one is found (TODO):
+  let userId = parseInt(Math.random()*1000000);
 
-    const user = {
-      userId: userId,
-      email: email,
-      username: username,
-      hash: hash,
-      salt: salt
-    };
+  const {hash, salt} = passwordUtil.hashPassword(password);
 
-    databaseUtil.addUser(user);
+  const user = {
+    userId: userId,
+    email: email,
+    username: username,
+    hash: hash,
+    salt: salt
+  };
 
-    const errorMessage = encodeURIComponent(
-      "There was a problem. Please try again"
-    );
-    passport.authenticate('local', {
-      failureRedirect: '/login?errorMessage='+errorMessage,
-      successRedirect: '/'
-    })(request, response, next);
-  }
+  databaseUtil.addUser(user);
+
+  const errorMessage = encodeURIComponent(
+    "There was a problem. Please try again"
+  );
+  passport.authenticate('local', {
+    failureRedirect: '/login?errorMessage='+errorMessage,
+    successRedirect: '/'
+  })(request, response, next);
 });
 
 module.exports = router;
