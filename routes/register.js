@@ -61,13 +61,11 @@ router.post('/submit', function(request, response, next){
 
     databaseUtil.addUser(user);
 
-    console.log("Yup");
-
     const errorMessage = encodeURIComponent(
-      "There was a problem. Please check your credentials and try again"
+      "There was a problem. Please try again"
     );
     passport.authenticate('local', {
-      failureRedirect: '/register?'+errorMessage,
+      failureRedirect: '/login?errorMessage='+errorMessage,
       successRedirect: '/'
     })(request, response, next);
   }

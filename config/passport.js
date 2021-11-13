@@ -3,16 +3,21 @@ const localStrategy = require('passport-local').Strategy;
 const passwordUtil = require('../utils/passwordUtil');
 const databaseUtil = require('../utils/databaseUtil');
 
+const LOG_PREFIX = "passport.js:: ";
+
 const customFields = {
   usernameField: 'username',
   passwordField: 'password'
 };
 
 const verifyCallback = (username, password, done) => {
+  console.log(LOG_PREFIX+"Trying to authenticate: "+username);
   const currentUser = databaseUtil.exists("username", username);
 
-  if(!currentUser) //User doesn't exist
+  if(!currentUser){ //User doesn't exist
+    console.log(LOG_PREFIX+"User doesn't exist");
     return done(null, false);
+  }
 
   const isPasswordValid = passwordUtil.validatePassword(
     password,
@@ -20,9 +25,12 @@ const verifyCallback = (username, password, done) => {
     currentUser.salt
   );
 
-  if(isPasswordValid)
+  if(isPasswordValid){
+    console.log(LOG_PREFIX+"Valid password.");
     return done(null, user);
+  }
 
+  console.log(LOG_PREFIX+"Login failed, likely invalid password");
   return done(null, false);
 }
 

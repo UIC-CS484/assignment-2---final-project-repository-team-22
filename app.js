@@ -4,8 +4,10 @@ const session = require('express-session');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-
 const passport = require('passport');
+const sqlite3 = require('sqlite3').verbose();
+const SQLiteStore = require('connect-sqlite3')(session);
+
 const indexRouter = require('./routes/index');
 const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
@@ -30,7 +32,11 @@ app.use(session({
   saveUninitialized: true,
   cookie: {
     maxAge: 1000*60*60*24*7 //One week
-  }
+  },
+  store : new SQLiteStore({
+    db: 'ExtinctOrAlive.sqlite',
+    dir: './database'
+  })
 }));
 
 require('./config/passport')(passport);

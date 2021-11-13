@@ -1,5 +1,7 @@
 const crypto = require('crypto');
 
+const LOG_PREFIX = "passwordUtil.js:: "
+
 function hashPassword(password){
   const salt = crypto.randomBytes(32).toString('hex');
   const hash = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('hex');
@@ -11,6 +13,7 @@ function hashPassword(password){
 }
 
 function validatePassword(inputPassword, existingHash, salt){
+  console.log("Trying to validate password");
   const generatedHash = crypto.pbkdf2Sync(inputPassword, salt, 10000, 64, 'sha512').toString('hex');
   return existingHash === generatedHash;
 }
