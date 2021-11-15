@@ -27,7 +27,7 @@ router.post('/submit', function(request, response, next){
   databaseUtil.exists("email", email,
     (currentUser)=>{
       if(typeof currentUser!=='undefined'){
-        const errorMessage = "There was an error.";
+        const errorMessage = encodeURIComponent("There was an error.");
         console.log("Email already exists: "+email);
         response.redirect('/register?errorMessage='+errorMessage);
       }
@@ -40,7 +40,7 @@ router.post('/submit', function(request, response, next){
   databaseUtil.exists("username", username,
     (currentUser)=>{
       if(typeof currentUser!=='undefined'){
-        const errorMessage = "Username already exists.";
+        const errorMessage = encodeURIComponent("Username already exists.");
         console.log("Username already exists: "+email);
         response.redirect('/register?errorMessage='+errorMessage);
       }

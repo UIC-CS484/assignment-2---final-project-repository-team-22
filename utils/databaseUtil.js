@@ -81,5 +81,54 @@ function addUser(user){
   });
 }
 
+function updateUser(fieldType, value, userId, successCallback, failureCallback){
+
+  console.log("Trying to update "+fieldType+" of "+userId+" to "+value);
+
+  let updateQuery = "";
+  let parameters = "";
+  switch (fieldType) {
+    case 'username':
+      updateQuery = "UPDATE user SET username = $value WHERE user_id = $userId ;";
+      parameters = {
+        $value: value,
+        $userId: userId
+      };
+      break;
+    case 'password':
+      updateQuery = "UPDATE user SET password_hash = $hash , salt = $salt "+
+                    "WHERE user_id = $userId ;";
+      parameters = {
+        $hash: value.hash,
+        $salt: value.salt,
+        $userId: userId
+      };
+      break;
+    case 'email':
+      updateQuery = "UPDATE user SET email = $value WHERE user_id = $userId ;";
+      parameters = {
+        $value: value,
+        $userId: userId
+      };
+      break;
+    default:
+      console.log(LOG_PREFIX+"Invalid field type");
+      failureCallback("Error: Invalid field type");
+      return false;
+  }
+
+  db.run(updateQuery, parameters, (error)=>{
+    if(error){
+      console.log(LOG_PREFIX+"Error updating records: "+error);
+      failureCallback(error);
+      return false;
+    }
+
+    successCallback();
+    return true;
+  });
+}
+
 module.exports.exists = exists;
 module.exports.addUser = addUser;
+module.exports.updateUser = updateUser;

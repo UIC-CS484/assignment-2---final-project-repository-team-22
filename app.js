@@ -13,6 +13,7 @@ const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
 const logoutRouter = require('./routes/logout');
 const specialPageRouter = require('./routes/special_page');
+const manageAccountRouter = require('./routes/manage_account');
 
 const app = express();
 
@@ -48,6 +49,7 @@ app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/logout', logoutRouter);
 app.use('/special_page', specialPageRouter);
+app.use('/manageAccount', manageAccountRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

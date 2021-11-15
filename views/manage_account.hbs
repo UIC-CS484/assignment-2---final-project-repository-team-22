@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Account - Extinct or Alive</title>
+    <link rel="icon" href="assets/images/Tree.ico" type="image/x-icon">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+    <meta name="author" content="Meer Piyush Shah">
+    <meta name="description" content="This webpage is part of the submission for
+      assignment 2 of the CS-484 course. It is the first iteration of the main
+      website">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <link rel="stylesheet" href="assets/css/template.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/login.css" type="text/css"/>
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+  </head>
+
+  <body class="is-preload">
+    <div id="wrapper" class="divided">
+
+      <!-- Change password form -->
+      <section class="wrapper style1 align-center">
+        <div class="inner">
+          <header>
+            <h3>Change Password</h3>
+          </header>
+          <div class="content">
+
+            <form name="changePasswordForm" method="post" action="/manageAccount/changePassword">
+              <div class="fields">
+                <div class="field">
+                  <label for="current_password">Current Password</label>
+                  <div class="with_button">
+                    <input type="text" name="current_password" id="current_password"
+                      class="has_button"/>
+                      <button type="button" name="show_password" class="input_button">
+                        <img src="assets\web-icons\show.png" alt="refresh" class="within_input">
+                      </button>
+                  </div>
+                </div>
+                <div class="field half">
+                  <label for="password">New Password</label>
+                  <div class="with_button">
+                    <input type="password" name="password" id="password"/>
+                    <button type="button" name="show_password" class="input_button">
+                      <img src="assets\web-icons\show.png" alt="refresh" class="within_input">
+                    </button>
+                  </div>
+                </div>
+                <div class="field half with_button">
+                  <label for="c_password">Confirm Password</label>
+                  <div class="with_button">
+                    <input type="password" name="c_password" id="c_password"/>
+                    <button type="button" name="show_password" class="input_button">
+                      <img src="assets\web-icons\show.png" alt="refresh" class="within_input">
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <button onclick="changePasswordSubmit()">
+                Change Password
+              </button>
+            </form>
+            <p id="error">{{errorMessage}}</p>
+          </div>
+        </section>
+
+    </div>
+  </body>
+
+  <!-- Script s -->
+    <script src="assets/js/manage_account.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+</html>
