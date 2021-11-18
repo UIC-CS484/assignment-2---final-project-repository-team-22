@@ -11,6 +11,12 @@
 #### Project ER Diagram:
 ![ERD](database/ExtinctOrAlive_ERD.png);
 
+#### Chart:
+* Charting Library used : [Charts.js](https://www.chartjs.org)
+This website aims to spread awareness about the scale at which wildlife is being destroyed.
+So, highlighting the steady increase in extinction rate is certainly useful.
+In the future, this chart will also include endangered and other type of threatened species.
+
 #### Reference and Tutorials:
 * Node and Express - [FreeCodeCamp](https://www.youtube.com/watch?v=Oe421EPjeBE)
 * Passport.js - [FreeCodeCamp](https://www.youtube.com/watch?v=F-sFp_AvHc8)
