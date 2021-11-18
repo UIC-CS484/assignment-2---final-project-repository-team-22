@@ -64,6 +64,27 @@
                 Change Password
               </button>
             </form>
+
+            <h3>Delete Account. (Cannot be undone)</h3>
+            <form name="deleteAccountForm" method="post" action="/manageAccount/deleteAccount">
+              <div class="fields">
+                <div class="field">
+                  <label for="password">Enter Current Password</label>
+                  <div class="with_button">
+                    <input type="text" name="password" id="password"
+                      class="has_button" required/>
+                      <button type="button" name="show_password" class="input_button">
+                        <img src="assets\web-icons\show.png" alt="refresh" class="within_input">
+                      </button>
+                  </div>
+                </div>
+                <button type="submit">
+                  Delete My Account
+                </button>
+              </div>
+
+            </form>
+
             <p id="error">{{errorMessage}}</p>
           </div>
         </section>

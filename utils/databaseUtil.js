@@ -1,4 +1,3 @@
-const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 
 const LOG_PREFIX = "databaseUtil.js:: ";
@@ -129,6 +128,143 @@ function updateUser(fieldType, value, userId, successCallback, failureCallback){
   });
 }
 
+function deleteUser(userId, successCallback, failureCallback){
+  console.log(LOG_PREFIX+"Trying to delete "+userId);
+
+  //TODO: figure out what else to delete
+  const deleteQuery = "delete from user where user_id = $userId";
+  const parameters = {$userId: userId};
+
+  db.run(deleteQuery, parameters, (error)=>{
+    if(error){
+      console.log(LOG_PREFIX+"Error delete account: "+error);
+      failureCallback(error);
+      return false;
+    }
+
+    successCallback();
+    return true;
+  });
+}
+
+function addSpecies(speciesDetails, successCallback, failureCallback){
+  console.log(LOG_PREFIX+"Trying to add "+speciesDetails.scientific_name);
+  const addQuery = "insert into species(species_id, scientific_name, status_code,"+
+                   "status_year) values (?, ?, ?, ?);"
+  const params = [null, speciesDetails.scientific_name, speciesDetails.status_code,
+                  speciesDetails.status_year];
+
+  db.run(addQuery, params, (error)=>{
+    if(error){
+      console.log(LOG_PREFIX+"Error occured while adding species: "+
+                  speciesDetails.scientific_name);
+      failureCallback(error);
+      return false;
+    }
+    successCallback();
+    return true;
+  })
+}
+
+function updateSpecies(species_id, speciesDetails, callback){
+  console.log(LOG_PREFIX+" trying to update "+species_id);
+
+  if(typeof speciesDetails.name != 'undefined'){
+    const updateQuery = "update species set name = ? where species_id = ?";
+    const parameters = [speciesDetails.name, species_id];
+    db.run(updateQuery, parameters, (error)=>{
+      if(error){
+        callback(error);
+        return false;
+      }
+    });
+  }
+
+  if(typeof speciesDetails.scientific_name != 'undefined'){
+    const updateQuery = "update species set scientific_name = ? where species_id = ?";
+    const parameters = [speciesDetails.scientific_name, species_id];
+    db.run(updateQuery, parameters, (error)=>{
+      if(error){
+        callback(error);
+        return false;
+      }
+    });
+  }
+
+  if(typeof speciesDetails.status_code != 'undefined'){
+    const updateQuery = "update species set status_code = ? where species_id = ?";
+    const parameters = [speciesDetails.status_code, species_id];
+    db.run(updateQuery, parameters, (error)=>{
+      if(error){
+        callback(error);
+        return false;
+      }
+    });
+  }
+
+  if(typeof speciesDetails.status_year != 'undefined'){
+    const updateQuery = "update species set status_year = ? where species_id = ?";
+    const parameters = [speciesDetails.status_year, species_id];
+    db.run(updateQuery, parameters, (error)=>{
+      if(error){
+        callback(error);
+        return false;
+      }
+    });
+  }
+
+  if(typeof speciesDetails.population != 'undefined'){
+    const updateQuery = "update species set population = ? where species_id = ?";
+    const parameters = [speciesDetails.population, species_id];
+    db.run(updateQuery, parameters, (error)=>{
+      if(error){
+        callback(error);
+        return false;
+      }
+    });
+  }
+
+  if(typeof speciesDetails.region != 'undefined'){
+    const updateQuery = "update species set region = ? where species_id = ?";
+    const parameters = [speciesDetails.region, species_id];
+    db.run(updateQuery, parameters, (error)=>{
+      if(error){
+        callback(error);
+        return false;
+      }
+    });
+  }
+
+  if(typeof speciesDetails.image_url != 'undefined'){
+    const updateQuery = "update species set image_url = ? where species_id = ?";
+    const parameters = [speciesDetails.image_url, species_id];
+    db.run(updateQuery, parameters, (error)=>{
+      if(error){
+        callback(error);
+        return false;
+      }
+    });
+  }
+
+  if(typeof speciesDetails.description != 'undefined'){
+    const updateQuery = "update species set description = ? where species_id = ?";
+    const parameters = [speciesDetails.description, species_id];
+    db.run(updateQuery, parameters, (error)=>{
+      if(error){
+        callback(error);
+        return false;
+      }
+    });
+  }
+
+  callback();
+  return true;
+}
+
+module.exports.db = db;
 module.exports.exists = exists;
 module.exports.addUser = addUser;
 module.exports.updateUser = updateUser;
+module.exports.deleteUser = deleteUser;
+module.exports.addSpecies = addSpecies;
+module.exports.updateSpecies = updateSpecies;

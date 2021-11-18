@@ -1,7 +1,7 @@
 function changePasswordSubmit(){
   const form = document.changePasswordForm;
-  const password = registerForm.elements["password"].value;
-  const c_password = registerForm.elements["c_password"].value;
+  const password = form.elements["password"].value;
+  const c_password = form.elements["c_password"].value;
 
   //Implementing strong passwords at both front and back end:
   if(!isPasswordStrong(password)){

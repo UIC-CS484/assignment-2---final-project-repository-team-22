@@ -63,4 +63,32 @@ router.post('/changePassword', function(request, response, next){
 
 });
 
+router.post('/deleteAccount', function(request, response, next){
+  console.log("Inside delete account");
+
+  //Checking if user is logged in:
+  const user = request.user;
+  if(typeof user === 'undefined'){
+    const errorMessage = encodeURIComponent("You need to login to access that page.");
+    response.redirect('/login?errorMessage='+errorMessage);
+  }
+
+  const password = request.body.password;
+  //Checking if current password is correct:
+  if(!passwordUtil.validatePassword(password, user.hash, user.salt)){
+    const errorMessage = encodeURIComponent("Current password is incorrect.");
+    response.redirect('/manageAccount?errorMessage='+errorMessage);
+  }
+
+  databaseUtil.deleteUser(user.userId,
+    () => {
+      response.redirect('/logout');
+    },
+    (error) => {
+      const errorMessage = encodeURIComponent("An unexpected error occured.");
+      response.redirect('/manageAccount?errorMessage='+errorMessage);
+    }
+  );
+});
+
 module.exports = router;

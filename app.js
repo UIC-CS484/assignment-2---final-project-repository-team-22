@@ -14,6 +14,7 @@ const registerRouter = require('./routes/register');
 const logoutRouter = require('./routes/logout');
 const specialPageRouter = require('./routes/special_page');
 const manageAccountRouter = require('./routes/manage_account');
+const restUtil = require('./utils/restUtil');
 
 const app = express();
 
@@ -66,6 +67,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.send(err.toString());
 });
+
+restUtil.addSpeciesToDB();
 
 app.listen(5000, ()=>{
   console.log("Listening on port 5000.");

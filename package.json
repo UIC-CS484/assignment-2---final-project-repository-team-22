@@ -7,6 +7,7 @@
     "test": "jest --coverage"
   },
   "dependencies": {
+    "axios": "^0.24.0",
     "connect-sqlite3": "^0.9.12",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
