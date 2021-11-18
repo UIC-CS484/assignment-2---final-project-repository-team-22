@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon app.js --ignore users.json",
+    "start": "nodemon app.js --ignore ExtinctSpecies.json, ",
     "test": "jest --coverage"
   },
   "dependencies": {
     "axios": "^0.24.0",
+    "chart.js": "^3.6.0",
     "connect-sqlite3": "^0.9.12",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",

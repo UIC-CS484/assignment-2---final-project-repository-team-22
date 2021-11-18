@@ -180,6 +180,7 @@ function updateSpecies(species_id, speciesDetails, callback){
     });
   }
 
+  /*
   if(typeof speciesDetails.scientific_name != 'undefined'){
     const updateQuery = "update species set scientific_name = ? where species_id = ?";
     const parameters = [speciesDetails.scientific_name, species_id];
@@ -190,6 +191,7 @@ function updateSpecies(species_id, speciesDetails, callback){
       }
     });
   }
+  */
 
   if(typeof speciesDetails.status_code != 'undefined'){
     const updateQuery = "update species set status_code = ? where species_id = ?";

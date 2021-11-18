@@ -1,8 +1,8 @@
 //Placeholder till IUCN API token gets approved:
 const extinctSpecies = require('../database/ExtinctSpecies.json');
-
 const databaseUtil = require('./databaseUtil');
 const axios = require('axios');
+const fs = require('fs');
 
 const GBIF_BASE = "https://api.gbif.org/v1/occurrence/";
 const GBIF_PARAMS = "&limit=1";
@@ -52,10 +52,13 @@ function addSpeciesToDB(){
       });
   });
 
-  //Counting number of extinct species per year:
+  //Counting number of extinct species per year (Chart):
   const yearQuery = "select status_year from species where status_code = 'EX' "+
                     "and status_year is not null";
-  let years = {};
+  let years= {};
+  for(let i=1700; i<=2021; i++)
+    years[i] = 0;
+
   databaseUtil.db.each(yearQuery,
     function(error, row){
       if(typeof years[row.status_year]=='undefined')
@@ -64,8 +67,20 @@ function addSpeciesToDB(){
         years[row.status_year]++;
     },
     function(){
-      for(let year in years)
-        console.log(year+"->"+years[year]);
+      //Write charting data to JSON file
+      //Backend:
+      fs.writeFile('./database/ExtinctionRate.json', JSON.stringify(years),
+        function(error){
+          if(typeof error!='undefined')
+            console.error(error);
+        });
+
+      //Frontend:
+      fs.writeFile('./views/assets/js/ExtinctionRate.json', JSON.stringify(years),
+        function(error){
+          if(typeof error!='undefined')
+            console.error(error);
+        });
     }
   );
 
