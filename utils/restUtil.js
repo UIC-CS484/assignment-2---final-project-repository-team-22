@@ -1,5 +1,5 @@
 //Placeholder till IUCN API token gets approved:
-const extinctSpecies = require('../database/ExtinctSpecies.json');
+const extinctSpecies = require('../database/EX.json');
 const databaseUtil = require('./databaseUtil');
 const axios = require('axios');
 const fs = require('fs');
@@ -10,6 +10,7 @@ const GBIF_PARAMS = "&limit=1";
 function addSpeciesToDB(){
 
   //Extinct Species: (TODO: Get list from IUCN)
+  /*
   for(let speciesName of extinctSpecies.result){
     let speciesDetails = {};
     speciesDetails.scientific_name = speciesName.scientific_name;
@@ -25,9 +26,10 @@ function addSpeciesToDB(){
     );
   }
 
-  /* Fetching and inserting details about each species: */
+  // Fetching and inserting details about each species:
 
   //Extinction Year: (TODO, use IUCN instead of GBIF)
+
   const getQuery = "select species_id, scientific_name from species where "+
                    "status_code='EX' and status_year is null;";
 
@@ -83,6 +85,7 @@ function addSpeciesToDB(){
         });
     }
   );
+  */
 
   //Other details:
   /*

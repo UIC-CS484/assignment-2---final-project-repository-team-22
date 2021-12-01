@@ -148,7 +148,7 @@ function deleteUser(userId, successCallback, failureCallback){
 }
 
 function addSpecies(speciesDetails, successCallback, failureCallback){
-  console.log(LOG_PREFIX+"Trying to add "+speciesDetails.scientific_name);
+  //console.log(LOG_PREFIX+"Trying to add "+speciesDetails.scientific_name);
   const addQuery = "insert into species(species_id, scientific_name, status_code,"+
                    "status_year) values (?, ?, ?, ?);"
   const params = [null, speciesDetails.scientific_name, speciesDetails.status_code,

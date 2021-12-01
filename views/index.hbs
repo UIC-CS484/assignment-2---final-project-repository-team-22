@@ -9,57 +9,94 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
 		<meta name="author" content="Meer Piyush Shah">
-		<meta name="description" content="This webpage is the submission for
-			assignment 2 of the CS-484 course. It is the first iteration of the main
-			website">
+		<meta name="description" content="This webpage is the final project of the
+			CS-484 course at UIC.">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 
 		<link rel="stylesheet" href="assets/css/template.css" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
+
 	<body class="is-preload">
 
 		<!-- Wrapper -->
 			<div id="wrapper" class="divided">
 
-				<!-- One -->
-					<section class="banner style5 orient-left content-align-centre image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
+					<section class="banner style5 orient-left content-align-centre
+						image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
+
 						<div class="content">
 							<h1 id="main_title">Extinct or Alive</h1>
 							<p class="major">
-								Species extinction rate is higher than ever. If this problem isn't
-								solved soon, we'll be the ones joining this list. But don't worry,
-								there's hope, lot's of it.
-
+							 	Our planet is headed for disaster, but, if we act now, we can yet
+								put it right.
 							</p>
-
-							<ul class="actions stacked">
-								<li>
-									<a href="/register" class="button big wide smooth-scroll-middle" id="actionButton">
-										Register
-									</a>
-								</li>
- 								<li>
-									<p id="welcomeText" >Welcome
-										<span id="usernameText">{{user.username}}</span>!
-									</p>
-								</li>
-							</ul>
 						</div>
+
 						<p id="video_credit">
 							Video Credit -
 							<a href="https://www.bbcearth.com/shows/serengeti-ii">BBC Earth</a>
 						</p>
 
+						<a href="\login" id="account_section">
+							<img id="account_icon" src="assets\images\lion.png" alt="Account">
+							<span id="welcome_text">
+								Welcome <span id="username_text">{{user.username}}</span>!
+							</span>
+						</a>
+
 						<video id="title_video" class="image"
-							src="assets\videos\Serengeti II  Trailer  BBC Earth.webm"
+							src="assets\videos\Serengeti_II_Trailer_BBC_Earth.webm"
 							autoplay loop muted/>
 					</section>
 
-					<div>
+					<section id="chart_section">
 					  <canvas id="extinctionRateChart"></canvas>
-					</div>
+
+						<div id="pieChartSection">
+
+							<canvas id="conservationPieChart"></canvas>
+
+							<form name="chart_form" id="chart_form">
+								<input type="checkbox" id="ex_check"  name="EX" checked />
+								<label for="ex_check">Extinct</label>
+								<input type="checkbox" id="ew_check"  name="EW" checked />
+								<label for="ex_check">Extinct in the Wild</label>
+								<input type="checkbox" id="cr_check"  name="CR" checked/>
+								<label for="cr_check">Critically Endandgered</label>
+								<input type="checkbox" id="en_check"  name="EN" checked/>
+								<label for="en_check">Endandgered</label>
+								<input type="checkbox" id="vu_check"  name="VU" checked/>
+								<label for="vu_check">Vulnerable</label>
+								<input type="checkbox" id="lr_check"  name="LR" checked />
+								<label for="lr_check">Lowered Risk</label>
+								<input type="checkbox" id="nt_check"  name="NT" checked />
+								<label for="nt_check">Near Threatened</label>
+								<input type="checkbox" id="lc_check"  name="LC" checked />
+								<label for="lc_check">Least Concerned</label>
+								<input type="checkbox" id="dd_check"  name="DD" checked />
+								<label for="dd_check">Data Deficient</label>
+								<button type="button" onclick="changePieChart();">Display</button>
+							</form>
+						</div>
+
+					</section>
+
+						<div id="recommended_videos">
+							<p class="major">
+								So, what can we mere mortals do? We can start by educating ourselves
+								and spread awareness. Here are some of my recommendations.
+							</p>
+							<iframe id="video1" width:"1920" height="1080" allowfullscreen=""
+								src="https://www.youtube.com/embed/64R2MYUt394">
+							</iframe>
+							<iframe id="video2" width:"1920" height="1080" allowfullscreen=""
+								src="https://www.youtube.com/embed/zTIsxKzpH_k">
+							</iframe>
+
+						</div>
+
 			</div>
 
 		<!-- Scripts -->

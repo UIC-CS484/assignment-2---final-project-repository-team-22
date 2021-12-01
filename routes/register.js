@@ -26,23 +26,54 @@ router.post('/submit', function(request, response, next){
   //Checking if email or username already exist:
   databaseUtil.exists("email", email,
     (currentUser)=>{
-      if(typeof currentUser!=='undefined'){
+      if(currentUser){
         const errorMessage = encodeURIComponent("There was an error.");
         console.log("Email already exists: "+email);
         response.redirect('/register?errorMessage='+errorMessage);
       }
-    },
-    (errorMessage)=>{
-      console.error(errorMessage);
-    }
-  );
+      else{
+        databaseUtil.exists("username", username,
+          (currentUser)=>{
+            if(currentUser){
+              const errorMessage = encodeURIComponent("Username already exists.");
+              console.log("Username already exists: "+email);
+              response.redirect('/register?errorMessage='+errorMessage);
+            }
+            else{
+              if(!passwordUtil.isPasswordStrong(password)){
+                const errorMessage = encodeURIComponent("Password isn't strong enough");
+                console.log("Weak password");
+                //Probably not secure, TODO figure out a better way
+                response.redirect('/register?errorMessage='+errorMessage);
+              }
 
-  databaseUtil.exists("username", username,
-    (currentUser)=>{
-      if(typeof currentUser!=='undefined'){
-        const errorMessage = encodeURIComponent("Username already exists.");
-        console.log("Username already exists: "+email);
-        response.redirect('/register?errorMessage='+errorMessage);
+              let userId = parseInt(Math.random()*1000000);
+
+              const {hash, salt} = passwordUtil.hashPassword(password);
+
+              const user = {
+                userId: userId,
+                email: email,
+                username: username,
+                hash: hash,
+                salt: salt
+              };
+
+              databaseUtil.addUser(user);
+
+              const errorMessage = encodeURIComponent(
+                "There was a problem. Please try again"
+              );
+              passport.authenticate('local', {
+                failureRedirect: '/login?errorMessage='+errorMessage,
+                successRedirect: '/'
+              })(request, response, next);
+            }
+          },
+          (errorMessage)=>{
+            console.error(errorMessage);
+          }
+        );
       }
     },
     (errorMessage)=>{
@@ -50,35 +81,6 @@ router.post('/submit', function(request, response, next){
     }
   );
 
-  if(!passwordUtil.isPasswordStrong(password)){
-    const errorMessage = encodeURIComponent("Password isn't strong enough");
-    console.log("Weak password");
-    //Probably not secure, TODO figure out a better way
-    response.redirect('/register?errorMessage='+errorMessage);
-  }
-
-  //Generating userID until a new one is found (TODO):
-  let userId = parseInt(Math.random()*1000000);
-
-  const {hash, salt} = passwordUtil.hashPassword(password);
-
-  const user = {
-    userId: userId,
-    email: email,
-    username: username,
-    hash: hash,
-    salt: salt
-  };
-
-  databaseUtil.addUser(user);
-
-  const errorMessage = encodeURIComponent(
-    "There was a problem. Please try again"
-  );
-  passport.authenticate('local', {
-    failureRedirect: '/login?errorMessage='+errorMessage,
-    successRedirect: '/'
-  })(request, response, next);
 });
 
 module.exports = router;
