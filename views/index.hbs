@@ -59,25 +59,24 @@
 							<canvas id="conservationPieChart"></canvas>
 
 							<form name="chart_form" id="chart_form">
-								<input type="checkbox" id="ex_check"  name="EX" checked />
+								<input type="checkbox" id="ex_check" checked onclick="updateChart('EX');"/>
 								<label for="ex_check">Extinct</label>
-								<input type="checkbox" id="ew_check"  name="EW" checked />
-								<label for="ex_check">Extinct in the Wild</label>
-								<input type="checkbox" id="cr_check"  name="CR" checked/>
+								<input type="checkbox" id="ew_check" checked onclick="updateChart('EW');"/>
+								<label for="ew_check">Extinct in the Wild</label>
+								<input type="checkbox" id="cr_check" checked onclick="updateChart('CR');"/>
 								<label for="cr_check">Critically Endandgered</label>
-								<input type="checkbox" id="en_check"  name="EN" checked/>
+								<input type="checkbox" id="en_check" checked onclick="updateChart('EN');"/>
 								<label for="en_check">Endandgered</label>
-								<input type="checkbox" id="vu_check"  name="VU" checked/>
+								<input type="checkbox" id="vu_check" checked onclick="updateChart('VU');"/>
 								<label for="vu_check">Vulnerable</label>
-								<input type="checkbox" id="lr_check"  name="LR" checked />
+								<input type="checkbox" id="lr_check" checked onclick="updateChart('LR');"/>
 								<label for="lr_check">Lowered Risk</label>
-								<input type="checkbox" id="nt_check"  name="NT" checked />
+								<input type="checkbox" id="nt_check" checked onclick="updateChart('NT');"/>
 								<label for="nt_check">Near Threatened</label>
-								<input type="checkbox" id="lc_check"  name="LC" checked />
+								<input type="checkbox" id="lc_check" checked onclick="updateChart('LC');"/>
 								<label for="lc_check">Least Concerned</label>
-								<input type="checkbox" id="dd_check"  name="DD" checked />
+								<input type="checkbox" id="dd_check" checked onclick="updateChart('DD');"/>
 								<label for="dd_check">Data Deficient</label>
-								<button type="button" onclick="changePieChart();">Display</button>
 							</form>
 						</div>
 

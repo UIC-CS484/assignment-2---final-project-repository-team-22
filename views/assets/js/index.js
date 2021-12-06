@@ -1,3 +1,11 @@
+var pieLabels;
+var pieData;
+const colours = ['rgb(230, 5, 32)', 'rgb(161, 91, 10)', 'rgb(212, 223, 11)',
+               'rgb(143, 11, 224)', 'rgb(92, 11, 224)', 'rgb(11, 205, 224)',
+               'rgb(11, 224, 183)', 'rgb(11, 224, 36)', 'rgb(80, 83, 80)'];
+
+var conservationPieChart;
+
 window.onload = function(){
   const username = document.getElementById("username_text").innerHTML;
   const login_label = document.getElementById("welcome_text");
@@ -40,6 +48,10 @@ window.onload = function(){
   xmlhttp2.onreadystatechange = function(){
     if(this.readyState == 4 && this.status == 200){
       const rawData = JSON.parse(this.responseText);
+
+      pieLabels = populatePieData(rawData).labels;
+      pieData = populatePieData(rawData).datasets[0].data;
+
       pieChartConfig = {
         type: 'pie',
         data: populatePieData(rawData),
@@ -57,7 +69,7 @@ window.onload = function(){
         },
       };
 
-      const conservationPieChart = new Chart(
+      conservationPieChart = new Chart(
         document.getElementById('conservationPieChart'), pieChartConfig
       );
 
@@ -78,9 +90,6 @@ function populateLineData(rawData){
     }
   }
 
-  for(year of labels)
-    console.log(year);
-
   const data = {
     labels: labels,
     datasets : [{
@@ -97,14 +106,10 @@ function populateLineData(rawData){
 function populatePieData(rawData){
   let labels = [];
   let numbers = [];
-  let colours = ['rgb(230, 5, 32)', 'rgb(161, 91, 10)', 'rgb(212, 223, 11)',
-                 'rgb(143, 11, 224)', 'rgb(92, 11, 224)', 'rgb(11, 205, 224)',
-                 'rgb(11, 224, 183)', 'rgb(11, 224, 36)', 'rgb(80, 83, 80)'];
 
   for(let status in rawData){
     labels.push(status);
     numbers.push(rawData[status]);
-    console.log(status+":"+rawData[status]);
   }
 
   const data = {
@@ -117,4 +122,48 @@ function populatePieData(rawData){
   };
 
   return data;
+}
+
+function updateChart(label){
+  const elementID = label.toLowerCase()+"_check";
+
+  const checked = document.getElementById(elementID).checked;
+  if(checked)
+    addElementToPie(label);
+  else
+    removeElementFromPie(label);
+}
+
+function addElementToPie(label){
+
+  console.log(pieData);
+  console.log(pieLabels);
+  console.log(label);
+
+
+  const index = pieLabels.indexOf(label);
+
+  console.log(index);
+
+  if(index == -1)
+    return;
+
+  conservationPieChart.data.labels.push(label);
+  conservationPieChart.data.datasets[0].data.push(pieData.at(index)); //Not confusing at all.
+  conservationPieChart.data.datasets[0].backgroundColor.push(colours.at(index));
+
+  conservationPieChart.update();
+}
+
+function removeElementFromPie(label){
+  const indexInPie = conservationPieChart.data.labels.indexOf(label);
+
+  if(indexInPie==-1)
+    return;
+
+  conservationPieChart.data.labels.splice(indexInPie, 1);
+  conservationPieChart.data.datasets[0].data.splice(indexInPie, 1);
+  conservationPieChart.data.datasets[0].backgroundColor.splice(indexInPie, 1);
+
+  conservationPieChart.update();
 }
