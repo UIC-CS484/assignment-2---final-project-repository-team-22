@@ -7,6 +7,12 @@ discuss solutions to protect each species.
 #### URL:
 https://extinct-or-alive.herokuapp.com/
 
+#### Deployment Workflow:
+(Deploying with Git)[https://devcenter.heroku.com/articles/git]</br>
+Already tracking the Project with Git and pushing to GitHub, </br>
+so pushing to Heroku is just one small step and a lot simpler, for a small </br>
+application like this.
+
 #### Development Tools and Packages:
 * Editor - [Atom](https://atom.io/)
 * Browser - [Firefox](https://www.mozilla.org/en-US/firefox/new/)
