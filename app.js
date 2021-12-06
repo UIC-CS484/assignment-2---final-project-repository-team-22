@@ -70,8 +70,9 @@ app.use(function(err, req, res, next) {
 
 restUtil.addSpeciesToDB();
 
-app.listen(5000, '0.0.0.0', ()=>{
-  console.log("Listening on port 5000.");
+const { PORT=3000, LOCAL_ADDRESS='0.0.0.0' } = process.env
+app.listen(PORT, LOCAL_ADDRESS, ()=>{
+  console.log("Listening on port "+PORT);
 });
 
 module.exports = app;
