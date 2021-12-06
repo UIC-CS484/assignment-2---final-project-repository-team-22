@@ -23,13 +23,13 @@ https://extinct-or-alive.herokuapp.com/
 * [IUCN Red List](https://apiv3.iucnredlist.org/api/v3/docs) (Manual download, due to pending approval)
 * [Wikimedia](https://api.wikimedia.org/)
 
-#### Code snippet of API interaction:
+#### Code snippet of API interaction (From utils/restUtil.js):
 ```
 const GBIF_BASE = "https://api.gbif.org/v1/occurrence/";
 const GBIF_PARAMS = "&limit=1";
 axios.get(GBIF_BASE+'search?scientific_name='+speciesDetails.scientific_name+
           GBIF_PARAMS)
-
+     .then ...
 ```
 
 #### Credits:
