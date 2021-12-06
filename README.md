@@ -8,7 +8,7 @@ discuss solutions to protect each species.
 https://extinct-or-alive.herokuapp.com/
 
 #### Deployment Workflow:
-(Deploying with Git)[https://devcenter.heroku.com/articles/git]</br>
+[Deploying with Git](https://devcenter.heroku.com/articles/git)</br>
 Already tracking the Project with Git and pushing to GitHub, </br>
 so pushing to Heroku is just one small step and a lot simpler, for a small </br>
 application like this.
