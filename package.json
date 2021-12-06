@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon app.js --ignore ExtinctSpecies.json, ",
+    "start": "node app.js",
     "test": "jest --coverage"
   },
   "dependencies": {
