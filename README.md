@@ -1,8 +1,11 @@
 #### Creator - Meer Piyush Shah
 
-This website aims to spread awareness about the severity of damage caused due to </br>
+This simple website aims to spread awareness about the severity of damage caused due to </br>
 habitat destruction and climate change. And in the future, act as a forum to </br>
 discuss solutions to protect each species.
+
+#### URL:
+https://extinct-or-alive.herokuapp.com/
 
 #### Development Tools and Packages:
 * Editor - [Atom](https://atom.io/)
@@ -19,6 +22,15 @@ discuss solutions to protect each species.
 * [GBIF](https://www.gbif.org/) | Global Biodiversity Information Facility
 * [IUCN Red List](https://apiv3.iucnredlist.org/api/v3/docs) (Manual download, due to pending approval)
 * [Wikimedia](https://api.wikimedia.org/)
+
+#### Code snippet of API interaction:
+```
+const GBIF_BASE = "https://api.gbif.org/v1/occurrence/";
+const GBIF_PARAMS = "&limit=1";
+axios.get(GBIF_BASE+'search?scientific_name='+speciesDetails.scientific_name+
+          GBIF_PARAMS)
+
+```
 
 #### Credits:
 * FrontEnd Template - [HTML5 Up](https://html5up.net/story)
